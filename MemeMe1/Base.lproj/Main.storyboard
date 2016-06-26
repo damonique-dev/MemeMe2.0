@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Create Meme View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="CreateMemeViewController" customModule="MemeMe1" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="bottom" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5MJ-VC-b6h">
-                                <rect key="frame" x="0.0" y="507" width="600" height="17"/>
+                                <rect key="frame" x="0.0" y="529" width="600" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
@@ -35,7 +35,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lIk-R4-ZvR" secondAttribute="bottom" id="2k1-aV-g2w"/>
-                            <constraint firstItem="5MJ-VC-b6h" firstAttribute="bottom" secondItem="lIk-R4-ZvR" secondAttribute="bottom" constant="-32" id="6PN-Jh-yL7"/>
+                            <constraint firstItem="5MJ-VC-b6h" firstAttribute="bottom" secondItem="lIk-R4-ZvR" secondAttribute="bottom" constant="-10" id="6PN-Jh-yL7"/>
                             <constraint firstItem="5MJ-VC-b6h" firstAttribute="leading" secondItem="lIk-R4-ZvR" secondAttribute="leading" id="7dL-E3-QLV"/>
                             <constraint firstItem="kp4-Du-H61" firstAttribute="leading" secondItem="lIk-R4-ZvR" secondAttribute="leading" id="CJd-F0-lGb"/>
                             <constraint firstItem="lIk-R4-ZvR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="El0-LN-gXM"/>
@@ -80,6 +80,7 @@
                         <outlet property="bottomText" destination="5MJ-VC-b6h" id="P5v-R9-okO"/>
                         <outlet property="cameraButton" destination="QwA-vb-DkS" id="Rk8-Pg-yEy"/>
                         <outlet property="imageView" destination="lIk-R4-ZvR" id="5d3-eZ-IYT"/>
+                        <outlet property="shareButton" destination="4cg-fB-AeJ" id="qbh-lL-921"/>
                         <outlet property="topText" destination="kp4-Du-H61" id="iCU-HA-hm7"/>
                     </connections>
                 </viewController>
