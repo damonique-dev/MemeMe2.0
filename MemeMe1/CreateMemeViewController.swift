@@ -16,11 +16,13 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     
+    var meme: Meme?
+
     let memeTextAttributes = [
         NSStrokeColorAttributeName : UIColor(white:0.0, alpha:1.0),
         NSForegroundColorAttributeName : UIColor(white:1.0, alpha:1.0),
         NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 50)!,
-        NSStrokeWidthAttributeName : -8,
+        NSStrokeWidthAttributeName : -3.0,
     ]
     
     var keyboardHeight :CGFloat!
@@ -37,13 +39,23 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        topText.text = "TOP"
-        bottomText.text = "BOTTOM"
         setUpTextField(topText)
         setUpTextField(bottomText)
-        
+        if let memeImage = meme {
+            topText.text = memeImage.topText
+            bottomText.text = memeImage.bottomText
+            imageView.image = memeImage.originalImage
+            shareButton.enabled = true
+            print(topText.text)
+            print(bottomText.text)
+        }
+        else {
+            topText.text = "TOP"
+            bottomText.text = "BOTTOM"
+            shareButton.enabled = false
+        }
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-        shareButton.enabled = false
+        
     }
     
     //Sets up text fields
@@ -76,8 +88,15 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
         let image = generateMemedImage()
         let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         activityController.completionWithItemsHandler = {
-            (s: String?, ok: Bool, items: [AnyObject]?, err:NSError?) -> Void in
-                _ = Meme(topText:self.topText.text!, bottomText:self.bottomText.text!, originalImage:self.imageView.image!, memedImage:image)
+            (string, ok, items, err) -> Void in
+            if ok {
+                let meme = Meme(topText:self.topText.text!, bottomText:self.bottomText.text!, originalImage:self.imageView.image!, memedImage:image)
+                // Add it to the memes array in the Application Delegate
+                let object = UIApplication.sharedApplication().delegate
+                let appDelegate = object as! AppDelegate
+                appDelegate.memes.append(meme)
+                self.backToRoot()
+            }
         }
         presentViewController(activityController, animated: true, completion:nil)
     }
@@ -88,6 +107,7 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
         bottomText.text = "BOTTOM"
         imageView.image = nil
         shareButton.enabled = false
+        backToRoot()
     }
     
     //Loads selected/captured image into image view
@@ -105,7 +125,7 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
             textField.text = "";
         }
     }
-    
+
     //Keyboard hides when return is pressed
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder();
@@ -125,7 +145,7 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
 
     //Adjusts the view for keyboard
     func keyboardWillShow(notification: NSNotification) {
-        keyboardHeight = getKeyboardHeight(notification)
+        keyboardHeight = getKeyboardHeight(notification) * -1
         if(bottomText.isFirstResponder()){
             self.view.frame.origin.y -= keyboardHeight
         }
@@ -153,6 +173,11 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
         navigationController?.toolbarHidden = false
         
         return memedImage
+    }
+    
+    func backToRoot() {
+        let tabController = self.storyboard!.instantiateViewControllerWithIdentifier("tabBar")
+        UIApplication.sharedApplication().keyWindow?.rootViewController = tabController
     }
 
 }
