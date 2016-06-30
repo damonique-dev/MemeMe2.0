@@ -17,12 +17,6 @@ class MemeCollectionViewController: UICollectionViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.tabBarController?.tabBar.hidden = false
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
         let space: CGFloat = 3.0
         let dimension = (view.frame.size.width - (2 * space)) / 3.0
         
@@ -32,6 +26,11 @@ class MemeCollectionViewController: UICollectionViewController {
         
         self.collectionView!.registerClass(CustomMemeCell.self,forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,withReuseIdentifier: "CustomMemeCell")
         self.tabBarController?.tabBar.hidden = false
+        collectionView?.reloadData()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

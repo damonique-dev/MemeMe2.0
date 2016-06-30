@@ -284,7 +284,7 @@
         <!--Navigation Controller-->
         <scene sceneID="aol-8c-4UC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="8ZA-QC-nV4" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navCreateMemeVC" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="8ZA-QC-nV4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qll-9c-Ppt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

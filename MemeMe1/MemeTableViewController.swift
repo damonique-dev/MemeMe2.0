@@ -3,7 +3,7 @@
 //  MemeMe2
 //
 //  Created by Damonique Thomas on 6/26/16.
-//  Copyright © 2016 Damonique Thomas. All rights reserved.
+//  Copyright Â© 2016 Damonique Thomas. All rights reserved.
 //
 
 import UIKit
@@ -17,12 +17,14 @@ class MemeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.tabBar.hidden = false
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
+        tableView.reloadData()
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memes.count
     }

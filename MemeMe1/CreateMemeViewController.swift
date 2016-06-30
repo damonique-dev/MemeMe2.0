@@ -46,8 +46,6 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
             bottomText.text = memeImage.bottomText
             imageView.image = memeImage.originalImage
             shareButton.enabled = true
-            print(topText.text)
-            print(bottomText.text)
         }
         else {
             topText.text = "TOP"
@@ -95,7 +93,7 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
                 let object = UIApplication.sharedApplication().delegate
                 let appDelegate = object as! AppDelegate
                 appDelegate.memes.append(meme)
-                self.backToRoot()
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
         presentViewController(activityController, animated: true, completion:nil)
@@ -107,7 +105,7 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
         bottomText.text = "BOTTOM"
         imageView.image = nil
         shareButton.enabled = false
-        backToRoot()
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     //Loads selected/captured image into image view
@@ -122,13 +120,13 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
     //Clears text when first editing
     func textFieldDidBeginEditing(textField: UITextField){
         if(textField.text == "TOP" || textField.text == "BOTTOM"){
-            textField.text = "";
+            textField.text = ""
         }
     }
 
     //Keyboard hides when return is pressed
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder();
+        textField.resignFirstResponder()
         view.frame.origin.y = 0
         return true
     }
@@ -147,7 +145,7 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
     func keyboardWillShow(notification: NSNotification) {
         keyboardHeight = getKeyboardHeight(notification) * -1
         if(bottomText.isFirstResponder()){
-            self.view.frame.origin.y -= keyboardHeight
+            self.view.frame.origin.y = keyboardHeight
         }
     }
 
@@ -174,10 +172,7 @@ class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegat
         
         return memedImage
     }
-    
-    func backToRoot() {
-        let tabController = self.storyboard!.instantiateViewControllerWithIdentifier("tabBar")
-        UIApplication.sharedApplication().keyWindow?.rootViewController = tabController
+    deinit{
+        print("view is discared")
     }
-
 }

@@ -24,9 +24,10 @@ class MemeDetailViewController: UIViewController {
     }
 
     func editMeme(sender: AnyObject) {
-        let object: AnyObject = self.storyboard!.instantiateViewControllerWithIdentifier("createMemeVC")
-        let controller = object as! CreateMemeViewController
-        controller.meme = meme
-        navigationController!.pushViewController(controller, animated: true)
+        let object: AnyObject = self.storyboard!.instantiateViewControllerWithIdentifier("navCreateMemeVC")
+        let controller = object as! UINavigationController
+        let createController = controller.topViewController as! CreateMemeViewController
+        createController.meme = meme
+        navigationController!.presentViewController(controller, animated: true, completion: nil)
     }
 }
